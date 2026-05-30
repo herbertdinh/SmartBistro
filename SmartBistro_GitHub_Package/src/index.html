@@ -3,16 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SmartBistro QR-based restaurant management prototype for SENG205." />
   <title>SmartBistro Prototype</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header>
-    <h1>SmartBistro</h1>
-    <p>QR-Based Restaurant Management Prototype</p>
+  <header class="hero">
+    <div>
+      <h1>SmartBistro</h1>
+      <p>Agile-Based Restaurant Management System Prototype</p>
+    </div>
+    <span class="badge">SENG205 Project</span>
   </header>
 
-  <nav>
+  <nav class="navbar" aria-label="Prototype navigation">
     <button onclick="showPage('menu')">Customer Menu</button>
     <button onclick="showPage('cart')">Cart & Checkout</button>
     <button onclick="showPage('kds')">Kitchen Display</button>
@@ -21,71 +26,174 @@
   </nav>
 
   <main>
+    <!-- Customer Menu -->
     <section id="menu" class="page active">
-      <h2>Customer Menu</h2>
+      <div class="section-heading">
+        <h2>Customer Menu</h2>
+        <p>Customers scan a QR code, browse menu items, customise orders, and send orders directly to the kitchen.</p>
+      </div>
+
       <div class="grid">
         <article class="card">
           <h3>Grilled Salmon</h3>
-          <p>Fresh salmon with seasonal vegetables.</p>
+          <p>Fresh salmon served with seasonal vegetables and lemon butter sauce.</p>
           <strong>$28.00</strong>
           <button onclick="addToCart('Grilled Salmon', 28)">Add to Cart</button>
         </article>
+
         <article class="card">
           <h3>Beef Burger</h3>
-          <p>House-made burger with chips.</p>
+          <p>House-made beef burger with chips, lettuce, tomato, cheese, and aioli.</p>
           <strong>$22.00</strong>
           <button onclick="addToCart('Beef Burger', 22)">Add to Cart</button>
         </article>
+
         <article class="card">
           <h3>Caesar Salad</h3>
-          <p>Classic salad with grilled chicken option.</p>
+          <p>Classic Caesar salad with optional grilled chicken and parmesan.</p>
           <strong>$18.00</strong>
           <button onclick="addToCart('Caesar Salad', 18)">Add to Cart</button>
+        </article>
+
+        <article class="card">
+          <h3>Truffle Mushroom Pasta</h3>
+          <p>Creamy mushroom pasta with truffle oil and fresh herbs.</p>
+          <strong>$24.00</strong>
+          <button onclick="addToCart('Truffle Mushroom Pasta', 24)">Add to Cart</button>
         </article>
       </div>
     </section>
 
+    <!-- Cart and Checkout -->
     <section id="cart" class="page">
-      <h2>Cart & Checkout</h2>
-      <ul id="cartItems"></ul>
-      <p><strong>Total:</strong> $<span id="total">0</span></p>
-      <button onclick="checkout()">Confirm Payment</button>
+      <div class="section-heading">
+        <h2>Cart & Checkout</h2>
+        <p>Customers review selected items, confirm the order, and complete payment securely.</p>
+      </div>
+
+      <div class="card">
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> $<span id="total">0</span></p>
+        <button onclick="checkout()">Confirm Payment</button>
+        <p class="hint">Demo payment gateway: successful payment sends the order to the Kitchen Display System.</p>
+      </div>
     </section>
 
+    <!-- Kitchen Display System -->
     <section id="kds" class="page">
-      <h2>Kitchen Display System</h2>
-      <div id="kdsOrders" class="card">No active kitchen orders.</div>
+      <div class="section-heading">
+        <h2>Kitchen Display System</h2>
+        <p>Kitchen staff receive real-time orders and update preparation status.</p>
+      </div>
+
+      <div id="kdsOrders" class="card">
+        No active kitchen orders.
+      </div>
     </section>
 
+    <!-- Reservation -->
     <section id="reservation" class="page">
-      <h2>Reservation</h2>
-      <form onsubmit="reserveTable(event)">
-        <label>Name <input type="text" id="resName" required /></label>
-        <label>Date <input type="date" id="resDate" required /></label>
-        <label>Time <input type="time" id="resTime" required /></label>
-        <label>Guests <input type="number" id="resGuests" min="1" required /></label>
+      <div class="section-heading">
+        <h2>Reservation</h2>
+        <p>Customers can reserve a table by selecting date, time, and guest number.</p>
+      </div>
+
+      <form class="card" onsubmit="reserveTable(event)">
+        <label>
+          Name
+          <input type="text" id="resName" placeholder="Enter customer name" required />
+        </label>
+
+        <label>
+          Date
+          <input type="date" id="resDate" required />
+        </label>
+
+        <label>
+          Time
+          <input type="time" id="resTime" required />
+        </label>
+
+        <label>
+          Guests
+          <input type="number" id="resGuests" min="1" max="20" required />
+        </label>
+
         <button type="submit">Reserve Table</button>
       </form>
-      <p id="reservationResult"></p>
+
+      <p id="reservationResult" class="result"></p>
     </section>
 
+    <!-- Admin Dashboard -->
     <section id="admin" class="page">
-      <h2>Admin Dashboard</h2>
-      <div class="grid">
-        <div class="metric"><span>$1,240</span><p>Today's Sales</p></div>
-        <div class="metric"><span>36</span><p>Orders</p></div>
-        <div class="metric"><span>5</span><p>Low Stock Items</p></div>
-        <div class="metric"><span>92%</span><p>Order Accuracy</p></div>
+      <div class="section-heading">
+        <h2>Admin Dashboard</h2>
+        <p>Managers monitor sales, orders, inventory, and operational performance.</p>
       </div>
-      <h3>Inventory Snapshot</h3>
-      <table>
-        <tr><th>Item</th><th>Stock</th><th>Status</th></tr>
-        <tr><td>Salmon</td><td>8</td><td>Low</td></tr>
-        <tr><td>Burger Buns</td><td>42</td><td>OK</td></tr>
-        <tr><td>Lettuce</td><td>15</td><td>OK</td></tr>
-      </table>
+
+      <div class="grid metrics">
+        <div class="metric">
+          <span>$1,240</span>
+          <p>Today's Sales</p>
+        </div>
+
+        <div class="metric">
+          <span>36</span>
+          <p>Orders</p>
+        </div>
+
+        <div class="metric">
+          <span>5</span>
+          <p>Low Stock Items</p>
+        </div>
+
+        <div class="metric">
+          <span>92%</span>
+          <p>Order Accuracy</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <h3>Inventory Snapshot</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Stock</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Salmon</td>
+              <td>8</td>
+              <td><span class="status warning">Low</span></td>
+            </tr>
+            <tr>
+              <td>Burger Buns</td>
+              <td>42</td>
+              <td><span class="status ok">OK</span></td>
+            </tr>
+            <tr>
+              <td>Lettuce</td>
+              <td>15</td>
+              <td><span class="status ok">OK</span></td>
+            </tr>
+            <tr>
+              <td>Chicken Breast</td>
+              <td>6</td>
+              <td><span class="status warning">Low</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </section>
   </main>
+
+  <footer>
+    <p>SmartBistro Prototype | QR Ordering | KDS | Inventory | Reservation | Analytics</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
