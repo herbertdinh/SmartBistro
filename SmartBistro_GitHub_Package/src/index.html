@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartBistro Prototype</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>SmartBistro</h1>
+    <p>QR-Based Restaurant Management Prototype</p>
+  </header>
+
+  <nav>
+    <button onclick="showPage('menu')">Customer Menu</button>
+    <button onclick="showPage('cart')">Cart & Checkout</button>
+    <button onclick="showPage('kds')">Kitchen Display</button>
+    <button onclick="showPage('reservation')">Reservation</button>
+    <button onclick="showPage('admin')">Admin Dashboard</button>
+  </nav>
+
+  <main>
+    <section id="menu" class="page active">
+      <h2>Customer Menu</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Grilled Salmon</h3>
+          <p>Fresh salmon with seasonal vegetables.</p>
+          <strong>$28.00</strong>
+          <button onclick="addToCart('Grilled Salmon', 28)">Add to Cart</button>
+        </article>
+        <article class="card">
+          <h3>Beef Burger</h3>
+          <p>House-made burger with chips.</p>
+          <strong>$22.00</strong>
+          <button onclick="addToCart('Beef Burger', 22)">Add to Cart</button>
+        </article>
+        <article class="card">
+          <h3>Caesar Salad</h3>
+          <p>Classic salad with grilled chicken option.</p>
+          <strong>$18.00</strong>
+          <button onclick="addToCart('Caesar Salad', 18)">Add to Cart</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="cart" class="page">
+      <h2>Cart & Checkout</h2>
+      <ul id="cartItems"></ul>
+      <p><strong>Total:</strong> $<span id="total">0</span></p>
+      <button onclick="checkout()">Confirm Payment</button>
+    </section>
+
+    <section id="kds" class="page">
+      <h2>Kitchen Display System</h2>
+      <div id="kdsOrders" class="card">No active kitchen orders.</div>
+    </section>
+
+    <section id="reservation" class="page">
+      <h2>Reservation</h2>
+      <form onsubmit="reserveTable(event)">
+        <label>Name <input type="text" id="resName" required /></label>
+        <label>Date <input type="date" id="resDate" required /></label>
+        <label>Time <input type="time" id="resTime" required /></label>
+        <label>Guests <input type="number" id="resGuests" min="1" required /></label>
+        <button type="submit">Reserve Table</button>
+      </form>
+      <p id="reservationResult"></p>
+    </section>
+
+    <section id="admin" class="page">
+      <h2>Admin Dashboard</h2>
+      <div class="grid">
+        <div class="metric"><span>$1,240</span><p>Today's Sales</p></div>
+        <div class="metric"><span>36</span><p>Orders</p></div>
+        <div class="metric"><span>5</span><p>Low Stock Items</p></div>
+        <div class="metric"><span>92%</span><p>Order Accuracy</p></div>
+      </div>
+      <h3>Inventory Snapshot</h3>
+      <table>
+        <tr><th>Item</th><th>Stock</th><th>Status</th></tr>
+        <tr><td>Salmon</td><td>8</td><td>Low</td></tr>
+        <tr><td>Burger Buns</td><td>42</td><td>OK</td></tr>
+        <tr><td>Lettuce</td><td>15</td><td>OK</td></tr>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
